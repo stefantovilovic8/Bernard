@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konjeniški center – Zajčja Dobrava</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* ── Page-specific overrides ─────────────────────────── */
+
+      /* Hero height on this page */
+      .hero { min-height: 92vh; }
+
+      /* Location tag pill */
+      .location-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: rgba(255,255,255,0.14);
+        border: 1px solid rgba(255,255,255,0.30);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border-radius: 999px;
+        padding: 0.38rem 0.9rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.93);
+        margin-bottom: 1.1rem;
+      }
+      .location-tag svg {
+        flex-shrink: 0;
+      }
+
+      /* ── Services section ─────────────────────────────────── */
+      .services-section {
+        padding: 5rem 0 4rem;
+        background: var(--bg);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-header .eyebrow {
+        color: var(--accent);
+      }
+      .section-header h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        margin-top: 0.4rem;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.4rem;
+      }
+
+      .svc-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        border: 1px solid rgba(182,194,184,0.45);
+        box-shadow: 0 8px 28px rgba(24,34,26,0.07);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: rise 0.6s ease forwards;
+      }
+      .svc-card:nth-child(2) { animation-delay: 80ms; }
+      .svc-card:nth-child(3) { animation-delay: 160ms; }
+      .svc-card:nth-child(4) { animation-delay: 220ms; }
+      .svc-card:nth-child(5) { animation-delay: 300ms; }
+      .svc-card:nth-child(6) { animation-delay: 380ms; }
+
+      /* Photo strip at top of each card */
+      .svc-photo {
+        position: relative;
+        height: 170px;
+        overflow: hidden;
+      }
+      .svc-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 400ms ease;
+      }
+      .svc-card:hover .svc-photo img {
+        transform: scale(1.06);
+      }
+
+      /* Icon badge overlaid on photo */
+      .svc-badge {
+        display: none;
+      }
+      .svc-badge svg {
+        width: 24px;
+        height: 24px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .svc-body {
+        padding: 1.6rem 1.25rem 1.4rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .svc-body h3 {
+        font-size: 1.08rem;
+        margin-bottom: 0.5rem;
+        color: var(--ink);
+      }
+      .svc-body p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        flex: 1;
+        line-height: 1.55;
+      }
+
+      /* ── CTA Banner ───────────────────────────────────────── */
+      .cta-banner {
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-banner-media {
+        position: absolute;
+        inset: 0;
+      }
+      .cta-banner-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 40%;
+      }
+      .cta-banner-overlay {
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(
+          135deg,
+          rgba(14,22,16,0.88) 0%,
+          rgba(40,65,44,0.78) 60%,
+          rgba(14,22,16,0.65) 100%
+        );
+        padding: 6rem 0;
+        text-align: center;
+      }
+      .cta-inner {
+        max-width: 620px;
+        margin: 0 auto;
+        color: var(--white);
+      }
+      .cta-inner h2 {
+        font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+        margin-bottom: 1.8rem;
+        color: var(--white);
+      }
+      .cta-btn {
+        display: inline-block;
+        background: var(--white);
+        color: #1a2e1e;
+        border-radius: 999px;
+        padding: 0.95rem 2.2rem;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      .cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(4,12,7,0.26);
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .services-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .services-grid { grid-template-columns: 1fr; }
+        .cta-banner-overlay { padding: 4rem 0; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO
+    ════════════════════════════════════════════════════════ -->
+    <header class="hero" id="vrh">
+      <nav class="top-nav container">
+        <a class="brand" href="./index.html">← Nazaj</a>
+        <div class="nav-links">
+          <a href="#storitve">Storitve</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="hero-media">
+        <!-- Horses grazing in lush green Slovenian countryside -->
+        <img
+          src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=2400&q=90&crop=entropy"
+          alt="Konj na travniku ob sončnem zahodu – konjeniški center Zajčja Dobrava"
+          style="object-position: center 60%;"
+        />
+      </div>
+
+      <div class="hero-overlay">
+        <div class="hero-content container">
+          <h1>Konjeniški center na posestvu v Zajčji dobravi</h1>
+          <p class="lead">
+            Odkrijte harmonijo med naravo in konji v osrčju Polja. Ponujamo strokovno vodenje, učenje in nepozabna doživetja.
+          </p>
+          <a class="cta" href="./kontakt.html">Kontaktirajte nas</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ═══════════════════════════════════════════════════
+           SERVICES GRID
+      ════════════════════════════════════════════════════ -->
+      <section class="services-section" id="storitve">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Naše storitve</p>
+            <h2>Vse, kar potrebujete za ljubezen do konj</h2>
+          </div>
+
+          <div class="services-grid">
+
+            <!-- 1 · Ujahovanje konj -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./ujahovanje-konj.webp"
+                  alt="Strokovno ujahovanje konja"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Horse icon -->
+                  <svg viewBox="0 0 24 24"><path d="M21 4c-1.5 0-3 .8-4 2H9C7.3 6 6 7.3 6 9v3H4l-2 4h2v4h4v-2h8v2h4v-4h2l-2-4V9c0-1-.4-2-1-2.7"/><circle cx="9" cy="10" r="1"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Strokovno ujahovanje konj</h3>
+                <p>Strokovno delo z mladimi konji v angleškem stilu.</p>
+              </div>
+            </article>
+
+            <!-- 2 · Jahalna šola -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./sola-jahanja.png"
+                  alt="Šola jahanja – tečaj za začetnike"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Graduation/education icon -->
+                  <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Šola jahanja (jahač 1 in 2)</h3>
+                <p>Tečaji za začetnike in nadaljevalce pod budnim očesom mentorjev.</p>
+              </div>
+            </article>
+
+            <!-- 3 · Vodeno terensko jahanje -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./terensko-jahanje.webp"
+                  alt="Vodeno terensko jahanje v naravi"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Map/trail icon -->
+                  <svg viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Vodeno terensko jahanje</h3>
+                <p>Sproščujoči izleti v naravo za izkušene jahače.</p>
+              </div>
+            </article>
+
+            <!-- 4 · Poni jahanje -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./poni-koticek.png"
+                  alt="Poni kotiček – otroci s poniji"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Star/child icon -->
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/><path d="m9 11 3 3 3-3"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Poni kotiček (2-7 let)</h3>
+                <p>Prvi stiki s konji za naše najmlajše obiskovalce.</p>
+              </div>
+            </article>
+
+            <!-- 5 · Jahalni tabori -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./rojstni-dnevi.webp"
+                  alt="Rojstni dnevi s konji"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Tent/camp icon -->
+                  <svg viewBox="0 0 24 24"><path d="m3 20 9-16 9 16H3z"/><path d="M12 4v16"/><path d="M3 20h18"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Rojstni dnevi s konji</h3>
+                <p>Nepozabna 2,5-urna zabava na posestvu!</p>
+              </div>
+            </article>
+
+            <!-- 6 · Rojstnodnevne zabave & Team buildingi -->
+            <article class="svc-card">
+              <div class="svc-photo">
+                <img
+                  src="./team-building.webp"
+                  alt="Team building na posestvu"
+                />
+                <div class="svc-badge" aria-hidden="true">
+                  <!-- Celebration/people icon -->
+                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+              </div>
+              <div class="svc-body">
+                <h3>Team Building</h3>
+                <p>Edinstveni programi za podjetja in skupine.</p>
+              </div>
+            </article>
+
+          </div><!-- /services-grid -->
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════
+           CTA BANNER
+      ════════════════════════════════════════════════════ -->
+      <section style="padding:2rem 0 3rem;background:var(--bg);text-align:center;">
+        <div class="container">
+          <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:1.8rem;color:var(--ink);">Rezervirajte ali oddajte povpraševanje</h2>
+          <a class="cta-btn" href="./kontakt.html" style="background:var(--accent);color:#fff;">Kontaktirajte nas</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FOOTER
+    ════════════════════════════════════════════════════════ -->
+    <footer id="kontakt">
+      <div class="container footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <p>+386 31 675 241</p>
+          <p>konji@zajcja-dobrava.si</p>
+          <p>Zajčja Dobrava, Polje, Slovenija</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer menu">
+          <a href="./index.html">← Nazaj na glavno stran</a>
+          <a href="#vrh">Domov</a>
+          <a href="#storitve">Storitve</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </footer>
+
+  </body>
+</html>
