@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konopljin nastilj – Prva Izbira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* ── Hero ────────────────────────────────────────────── */
+      .hero {
+        min-height: 72vh;
+        background: linear-gradient(to bottom, #1a2e1e 0%, #2e5235 40%, #5a8c5e 70%, #c8ddc9 88%, #ffffff 100%);
+      }
+      .hero-media { display: none; }
+      .hero-overlay {
+        background: none;
+        align-items: start;
+        padding-top: 12rem;
+      }
+      .hero-content {
+        color: #ffffff;
+        margin-left: 2rem;
+        margin-right: auto;
+        max-width: 700px;
+      }
+      .hero-content h1 { color: #ffffff; }
+      .hero-content .lead { color: rgba(255,255,255,0.88); }
+      .hero-content .eyebrow { color: rgba(255,255,255,0.72); }
+
+      /* ── Intro section ───────────────────────────────────── */
+      .intro-section {
+        padding: 4rem 0 3rem;
+        background: var(--white);
+      }
+      .intro-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      .intro-image {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        position: relative;
+        height: 380px;
+      }
+      .intro-image img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .intro-image img.active {
+        opacity: 1;
+      }
+      .intro-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(255,255,255,0.85);
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        transition: background 150ms ease;
+      }
+      .intro-nav-btn:hover { background: #fff; }
+      .intro-nav-btn.prev { left: 10px; }
+      .intro-nav-btn.next { right: 10px; }
+      .intro-nav-btn svg { width: 18px; height: 18px; stroke: #1a2e1e; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .intro-text .eyebrow { margin-bottom: 0.5rem; }
+      .intro-text h2 { margin-bottom: 1rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+      .intro-text p { color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+      /* ── Benefits ────────────────────────────────────────── */
+      .benefits-section {
+        padding: 4rem 0;
+        background: var(--bg);
+      }
+      .benefits-section .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .benefits-section .section-header h2 {
+        font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      }
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem;
+      }
+      .benefit-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        border: 1px solid rgba(182,194,184,0.45);
+        box-shadow: 0 8px 28px rgba(24,34,26,0.07);
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: rise 0.6s ease forwards;
+      }
+      .benefit-card:nth-child(2) { animation-delay: 80ms; }
+      .benefit-card:nth-child(3) { animation-delay: 160ms; }
+      .benefit-card:nth-child(4) { animation-delay: 220ms; }
+      .benefit-card:nth-child(5) { animation-delay: 300ms; }
+      .benefit-card .icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(69,98,75,0.10);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .benefit-card .icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .benefit-card h3 {
+        font-size: 1rem;
+        color: var(--ink);
+        margin: 0;
+      }
+      .benefit-card p {
+        font-size: 0.93rem;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* ── Zastirka section ───────────────────────────────────── */
+      .zastirka-section {
+        padding: 4rem 0;
+        background: var(--bg);
+      }
+      .zastirka-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      .zastirka-image {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        height: 380px;
+      }
+      .zastirka-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .zastirka-text h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 1rem; }
+      .zastirka-text p { color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+      @media (max-width: 900px) {
+        .zastirka-inner { grid-template-columns: 1fr; gap: 2rem; }
+        .zastirka-image { height: 280px; }
+      }
+
+      /* ── Animals section ─────────────────────────────────── */
+      .animals-section {
+        padding: 4rem 0;
+        background: var(--white);
+      }
+      .animals-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      /* Carousel */
+      .carousel {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        order: 2;
+        height: 360px;
+        background: #111;
+      }
+      .carousel-track {
+        display: flex;
+        height: 100%;
+        transition: transform 500ms cubic-bezier(0.4,0,0.2,1);
+      }
+      .carousel-track img {
+        min-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        flex-shrink: 0;
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.85);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+        transition: background 150ms ease;
+      }
+      .carousel-btn:hover { background: #fff; }
+      .carousel-btn svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .carousel-btn.prev { left: 10px; }
+      .carousel-btn.next { right: 10px; }
+      .carousel-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 2;
+      }
+      .carousel-dots span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: background 200ms ease, transform 200ms ease;
+      }
+      .carousel-dots span.active {
+        background: #fff;
+        transform: scale(1.25);
+      }
+      .animals-text { order: 1; }
+      .animals-text h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 1rem; }
+      .animals-text p { color: var(--muted); line-height: 1.7; margin-bottom: 0.5rem; }
+      .animals-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .animals-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.97rem;
+        color: var(--muted);
+      }
+      .animals-list li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      /* ── CTA ─────────────────────────────────────────────── */
+      .cta-section {
+        padding: 3rem 0 4rem;
+        background: var(--bg);
+        text-align: center;
+      }
+      .cta-section h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        margin-bottom: 0.75rem;
+      }
+      .cta-section .sub {
+        color: var(--muted);
+        margin-bottom: 2rem;
+        font-size: 1.05rem;
+      }
+      .cta-btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.95rem 2.2rem;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+      .cta-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(4,12,7,0.22);
+      }
+
+      /* ── Responsive ──────────────────────────────────────── */
+      @media (max-width: 900px) {
+        .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+        .intro-inner,
+        .animals-inner { grid-template-columns: 1fr; gap: 2rem; }
+        .animals-image { order: 0; }
+      }
+      @media (max-width: 600px) {
+        .benefits-grid { grid-template-columns: 1fr; }
+        .hero-content { margin-left: 1rem; }
+      }
+      footer { background: linear-gradient(135deg, #1a3a1e 0%, #2e6b35 50%, #4a8a52 100%); }
+    </style>
+  </head>
+  <body>
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO
+    ════════════════════════════════════════════════════════ -->
+    <header class="hero" id="vrh">
+      <nav class="top-nav container">
+        <a class="brand" href="./index.html">
+          <img class="brand-logo" src="./logo.webp" alt="Prva Izbira" />
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#prednosti">Prednosti</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="hero-media"></div>
+
+      <div class="hero-overlay">
+        <div class="hero-content container">
+          <p class="eyebrow">Konopljin nastilj</p>
+          <h1>Zagotovite svojim živalim najboljšo podlago: Brez prahu, visoka vpojnost in ekološka kakovost</h1>
+          <p class="lead">
+            Naravna rešitev za čistejši hlev, zdravejša dihala in srečnejše živali.
+          </p>
+          <a class="cta" href="./kontakt.html">Oddaj povpraševanje</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ═══════════════════════════════════════════════════
+           INTRO
+      ════════════════════════════════════════════════════ -->
+      <section class="intro-section">
+        <div class="container intro-inner">
+          <div class="intro-image" id="introSlider">
+            <img class="active" src="./nastilje-intro.webp" alt="Konopljin nastilj – tekstura in čistoča" />
+            <img src="./nastilje-custom-2.png" alt="Konj v hlevu na nastilju" />
+            <img src="./nastilje-custom-3.png" alt="Konopljin nastilj Aubiose" />
+            <img src="./nastilje-custom-4.png" alt="Zajec na konopljinem nastilju" />
+            <img src="./nastilje-custom-5.png" alt="Konopljin nastilj" />
+            <img src="./nastilje-custom-6.png" alt="Konopljin nastilj" />
+            <img src="./nastilje-custom-7.png" alt="Konopljin nastilj" />
+            <button class="intro-nav-btn prev" id="introPrev" aria-label="Prejšnja slika">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="intro-nav-btn next" id="introNext" aria-label="Naslednja slika">
+              <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+          <div class="intro-text">
+            <p class="eyebrow">Zakaj konopljin nastilj?</p>
+            <h2>Naravna izbira za vaše živali</h2>
+            <p>Konopljin nastilj je postal priljubljena izbira lastnikov perutnine in malih živali, kot so zajci, morski prašički, hrčki, kokoši, ptice ter druge domače živali, saj ustvarja čisto, suho in zdravo okolje za njihovo bivanje. Zaradi svojih odličnih lastnosti ga pogosto uporabljajo tudi lastniki konj in drugih večjih živali.</p>
+            <p>Zaradi izjemne vpojnosti, skoraj popolne odsotnosti prahu in naravne razgradljivosti je konopljin nastilj ena najboljših rešitev za dobrobit vaših živali. Hkrati omogoča enostavnejše čiščenje in vzdrževanje kletk, boksov ter hlevov.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════
+           BENEFITS GRID
+      ════════════════════════════════════════════════════ -->
+      <section class="benefits-section" id="prednosti">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Lastnosti</p>
+            <h2>Zakaj izbrati konopljin nastilj?</h2>
+          </div>
+
+          <div class="benefits-grid">
+
+            <div class="benefit-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+              </div>
+              <h3>Izjemna moč vpoja</h3>
+              <p>Konoplja vpije do 4-krat več vlage kot običajno žaganje ali slama. To pomeni, da so kopita vaših živali vedno na suhem, hlev pa ostaja svež dlje časa.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3>Brez prahu – idealno za alergike</h3>
+              <p>Nastilj je temeljito očiščeno prašnih delcev, kar je ključno za živali z respiratornimi težavami (npr. COPD) ali občutljivimi dihali.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+              </div>
+              <h3>Nevtralizacija vonja</h3>
+              <p>Naravna sestava konoplje veže amonijak, kar drastično zmanjša neprijetne vonjave v zaprtih prostorih.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+              </div>
+              <h3>Hitra razgradnja</h3>
+              <p>Po uporabi se nastilj hitro spremeni v super gnojilo. Za razliko od sena ali žagovine, konopljin nastilj zemlji ne dodaja kislosti, kar omogoča vrhunsko in naravno gnojenje vaših površin.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <h3>Ekonomična poraba</h3>
+              <p>Zaradi visoke vpojnosti porabite manj materiala, kar dolgoročno zniža stroške vzdrževanja hleva.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════
+           ZASTIRKA SECTION
+      ════════════════════════════════════════════════════ -->
+      <section class="zastirka-section">
+        <div class="container zastirka-inner">
+          <div class="zastirka-text">
+            <p class="eyebrow">Konoplja v vrtu</p>
+            <h2>Zastirka za vrt</h2>
+            <p>Zaradi izjemne vpojnosti vode je konoplja idealna tudi kot zastirka za vrt. V tleh učinkovito zadržuje vlago, preprečuje izsuševanje in ustvarja optimalne pogoje za rast vaših rastlin.</p>
+          </div>
+          <div class="zastirka-image">
+            <img src="./nastilj-zastirka.png" alt="Konopljin nastilj kot zastirka za vrt" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════
+           ANIMALS SECTION
+      ════════════════════════════════════════════════════ -->
+      <section class="animals-section">
+        <div class="container animals-inner">
+          <div class="animals-text">
+            <p class="eyebrow">Široka uporabnost</p>
+            <h2>Primerno za širok spekter živali</h2>
+            <p>Čeprav je konoplja najbolj priljubljena pri malih živalih, je odlična izbira tudi za druge živali. Visoka vpojnost in odsotnost prahu zagotavljata udobje in higieno v vsakem hlevu ali nastanitev.</p>
+            <ul class="animals-list">
+              <li>Konji</li>
+              <li>Male živali (zajci, morski prašički, itd...)</li>
+              <li>Perutnina</li>
+              <li>Eksotične živali</li>
+            </ul>
+          </div>
+          <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carouselTrack">
+              <img src="./nastilje-1.png" alt="Žrebič na konopljinem nastilju" />
+              <img src="./nastilje-2.png" alt="Piščanci na konopljinem nastilju" />
+              <img src="./nastilje-3.png" alt="Zajci na konopljinem nastilju" />
+              <img src="./nastilje-4.png" alt="Piščanci v ograjici na nastilju" />
+              <img src="./nastilje-5.png" alt="Prepelice na konopljinem nastilju" />
+            </div>
+            <button class="carousel-btn prev" id="prevBtn" aria-label="Prejšnja slika">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel-btn next" id="nextBtn" aria-label="Naslednja slika">
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <div class="carousel-dots" id="carouselDots">
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════
+           CTA
+      ════════════════════════════════════════════════════ -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Naročilo in dostava</h2>
+          <p class="sub">Ponujamo možnost nakupa posameznih bal ali večjih količin za kmetije in jahalne centre.</p>
+          <a class="cta-btn" href="./kontakt.html">Oddaj povpraševanje</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FOOTER
+    ════════════════════════════════════════════════════════ -->
+    <footer id="kontakt">
+      <div class="container footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
+          <p>+386 31 675 241</p>
+          <p>bernardbregant3@gmail.com</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer menu">
+          <a href="./index.html">Domov</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </footer>
+
+  <script>
+    (function() {
+      const track = document.getElementById('carouselTrack');
+      const dots = document.querySelectorAll('#carouselDots span');
+      const total = dots.length;
+      let current = 0;
+      let timer;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function startAuto() {
+        timer = setInterval(next, 4000);
+      }
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', function() { next(); resetAuto(); });
+      document.getElementById('prevBtn').addEventListener('click', function() { prev(); resetAuto(); });
+      dots.forEach(function(d, i) {
+        d.addEventListener('click', function() { goTo(i); resetAuto(); });
+      });
+
+      startAuto();
+    })();
+  </script>
+  <script>
+    (function() {
+      var imgs = document.querySelectorAll('#introSlider img');
+      var idx = 0;
+      var timer;
+
+      function goTo(n) {
+        imgs[idx].classList.remove('active');
+        idx = (n + imgs.length) % imgs.length;
+        imgs[idx].classList.add('active');
+      }
+      function startAuto() {
+        timer = setInterval(function() { goTo(idx + 1); }, 3500);
+      }
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      document.getElementById('introPrev').addEventListener('click', function() { goTo(idx - 1); resetAuto(); });
+      document.getElementById('introNext').addEventListener('click', function() { goTo(idx + 1); resetAuto(); });
+
+      startAuto();
+    })();
+  </script>
+  <script>
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          links.classList.remove('open');
+        });
+      });
+    })();
+  </script>
+  </body>
+</html>

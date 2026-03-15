@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Čiščenje – Prva Izbira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* ── Hero ────────────────────────────────────────────── */
+      .hero {
+        min-height: 72vh;
+        background: linear-gradient(to bottom, #0b1f3a 0%, #1a3a5c 30%, #4a7ea5 62%, #b8d4e8 82%, #ffffff 100%);
+      }
+      .hero-media { display: none; }
+      .hero-overlay {
+        background: none;
+        align-items: start;
+        padding-top: 12rem;
+      }
+      .hero-content {
+        color: #ffffff;
+        margin-left: 2rem;
+        margin-right: auto;
+        max-width: 700px;
+      }
+      .hero-content h1 { color: #ffffff; }
+      .hero-content .lead { color: rgba(255,255,255,0.88); }
+      .hero-content .eyebrow { color: rgba(255,255,255,0.72); }
+
+      /* ── Intro ───────────────────────────────────────────── */
+      .intro-section {
+        padding: 4rem 0 3rem;
+        background: var(--white);
+      }
+      .intro-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      .intro-image {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .intro-image img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        display: block;
+      }
+      .intro-text .eyebrow { margin-bottom: 0.5rem; }
+      .intro-text h2 { margin-bottom: 1rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+      .intro-text p { color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+      /* ── Services grid ───────────────────────────────────── */
+      .services-section {
+        padding: 4rem 0;
+        background: var(--bg);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-header h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-top: 0.4rem; }
+
+      .svc-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.4rem;
+      }
+      .svc-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        border: 1px solid rgba(182,194,184,0.45);
+        box-shadow: 0 8px 28px rgba(24,34,26,0.07);
+        padding: 2rem 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: rise 0.6s ease forwards;
+      }
+      .svc-card:nth-child(2) { animation-delay: 80ms; }
+      .svc-card:nth-child(3) { animation-delay: 160ms; }
+      .svc-card:nth-child(4) { animation-delay: 220ms; }
+      .svc-card .icon {
+        width: 46px;
+        height: 46px;
+        background: rgba(69,98,75,0.10);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.3rem;
+      }
+      .svc-card .icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .svc-card h3 { font-size: 1.08rem; color: var(--ink); margin: 0; }
+      .svc-card p { font-size: 0.94rem; color: var(--muted); margin: 0; line-height: 1.65; }
+
+      /* ── Why us ──────────────────────────────────────────── */
+      .why-section {
+        padding: 4rem 0;
+        background: var(--white);
+      }
+      .why-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+      .why-text h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 1.5rem; }
+      .why-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .why-list li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .why-list .bullet {
+        width: 36px;
+        height: 36px;
+        background: rgba(69,98,75,0.10);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+      .why-list .bullet svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .why-list strong { display: block; color: var(--ink); font-size: 1rem; margin-bottom: 0.2rem; }
+      .why-list span { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+      .why-image {
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .why-image img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Carousel */
+      .carousel { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+      .carousel-track { display: flex; transition: transform 0.5s ease; }
+      .carousel-track img { width: 100%; flex-shrink: 0; height: 380px; object-fit: cover; display: block; }
+      .carousel-btn {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: rgba(0,0,0,0.45); border: none; border-radius: 50%;
+        width: 42px; height: 42px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: background 180ms ease; z-index: 2;
+      }
+      .carousel-btn:hover { background: rgba(0,0,0,0.7); }
+      .carousel-btn svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .carousel-btn.prev { left: 10px; }
+      .carousel-btn.next { right: 10px; }
+      .carousel-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+      .carousel-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 200ms; }
+      .carousel-dots span.active { background: #fff; }
+
+      /* ── CTA ─────────────────────────────────────────────── */
+      .cta-section {
+        padding: 3rem 0 4rem;
+        background: var(--bg);
+        text-align: center;
+      }
+      .cta-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.75rem; }
+      .cta-section .sub { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+      .cta-section .location-note {
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .cta-btn {
+        display: inline-block;
+        background: #1a3a5c;
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.95rem 2.2rem;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+      .cta-btn:hover {
+        background: #0b1f3a;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(4,12,7,0.22);
+      }
+
+      /* ── Responsive ──────────────────────────────────────── */
+      @media (max-width: 900px) {
+        .intro-inner,
+        .why-inner { grid-template-columns: 1fr; gap: 2rem; }
+        .svc-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 600px) {
+        .hero-content { margin-left: 1rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- HERO -->
+    <header class="hero" id="vrh">
+      <nav class="top-nav container">
+        <a class="brand" href="./index.html">
+          <img class="brand-logo" src="./logo.webp" alt="Prva Izbira" />
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#storitve">Storitve</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+      <div class="hero-media"></div>
+      <div class="hero-overlay">
+        <div class="hero-content container">
+          <p class="eyebrow">Čiščenje</p>
+          <h1>Profesionalno čiščenje steklenih površin in bivalnih prostorov</h1>
+          <p class="lead">
+            Kristalno čista okna, sijaj steklenih fasad in temeljito urejeni prostori – zaupajte strokovnjakom.
+          </p>
+          <a class="cta" href="./kontakt.html">Oddaj povpraševanje</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- INTRO -->
+      <section class="intro-section">
+        <div class="container intro-inner">
+          <div class="intro-image">
+            <img
+              src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85&crop=top"
+              alt="Profesionalna čistilka čisti stekleno površino"
+            />
+          </div>
+          <div class="intro-text">
+            <p class="eyebrow">O naši storitvi</p>
+            <h2>Čisto okolje pomeni boljše počutje</h2>
+            <p>V našem podjetju vemo, da čisto okolje pomeni boljše počutje. Specializirani smo za zahtevnejša čiščenja steklenih površin in celovito oskrbo vaših notranjih prostorov.</p>
+            <p>Primarno delujemo v <strong>Ljubljani in okolici</strong>, za večje objekte in po dogovoru pa smo na voljo po celotni Sloveniji.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="services-section" id="storitve">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Naše storitve čiščenja</p>
+            <h2>Kaj ponujamo?</h2>
+          </div>
+          <div class="svc-grid">
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <h3>Specialistično čiščenje oken</h3>
+              <p>Poskrbimo za kristalno čista okna v vašem domu, stanovanju ali poslovnem prostoru. Očistimo tudi okvire, police in težje dostopna stekla.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/><path d="M3 7h18v14H3z"/><path d="M9 21V7"/><path d="M15 21V7"/></svg>
+              </div>
+              <h3>Čiščenje steklenih fasad in vitrin</h3>
+              <p>Imate trgovino, lokal ali sodobno hišo z veliko stekla? Povrnemo jim prvotni sijaj brez sledi čiščenja.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <h3>Generalno čiščenje hiš in stanovanj</h3>
+              <p>Temeljito očistimo vaše prostore (sobe, kuhinje, kopalnice), bodisi po prenovi, pred vselitvijo ali kot redno sezonsko osvežitev.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <h3>Čiščenje po renovacijah</h3>
+              <p>Ko gradbinci odidejo, nastopimo mi. Odstranimo ves prah in trde madeže, da bo vaš dom takoj pripravljen na bivanje.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY US -->
+      <section class="why-section">
+        <div class="container why-inner">
+          <div class="why-text">
+            <p class="eyebrow">Zakaj mi?</p>
+            <h2>Zakaj izbrati naš čistilni servis?</h2>
+            <ul class="why-list">
+              <li>
+                <div class="bullet">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div>
+                  <strong>Natančnost</strong>
+                  <span>Ne spregledamo nobenega kota. Naš cilj je popolno zadovoljstvo stranke.</span>
+                </div>
+              </li>
+              <li>
+                <div class="bullet">
+                  <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <strong>Lokalna odzivnost</strong>
+                  <span>Najhitreje smo na voljo v Ljubljani z okolico.</span>
+                </div>
+              </li>
+              <li>
+                <div class="bullet">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <strong>Prilagodljivost</strong>
+                  <span>Delo opravimo takrat, ko vam najbolj ustreza, diskretno in učinkovito.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="carousel" id="ciscenjeCarousel">
+            <div class="carousel-track" id="ciscenjeTrack">
+              <img src="./ciscenje-1.png" alt="Čiščenje 1" />
+              <img src="./ciscenje-2.png" alt="Čiščenje 2" />
+              <img src="./ciscenje-3.png" alt="Čiščenje 3" />
+              <img src="./ciscenje-4.png" alt="Čiščenje 4" />
+              <img src="./ciscenje-5.webp" alt="Čiščenje 5" />
+              <img src="./ciscenje-6.png" alt="Čiščenje 6" />
+            </div>
+            <button class="carousel-btn prev" onclick="ciscenjePrev()" aria-label="Prejšnja">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel-btn next" onclick="ciscenjeNext()" aria-label="Naslednja">
+              <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+            <div class="carousel-dots" id="ciscenjeDots">
+              <span class="active" onclick="ciscenjeGo(0)"></span>
+              <span onclick="ciscenjeGo(1)"></span>
+              <span onclick="ciscenjeGo(2)"></span>
+              <span onclick="ciscenjeGo(3)"></span>
+              <span onclick="ciscenjeGo(4)"></span>
+              <span onclick="ciscenjeGo(5)"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Potrebujete čiščenje?</h2>
+          <p class="sub">Zagotovite si prost termin še danes. Pokličite nas ali izpolnite obrazec za hitro ponudbo.</p>
+          <a class="cta-btn" href="./kontakt.html">Oddaj povpraševanje</a>
+          <p class="location-note">Ljubljana &amp; okolica &nbsp;|&nbsp; Celotna Slovenija (po dogovoru)</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="kontakt">
+      <div class="container footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
+          <p>+386 31 675 241</p>
+          <p>bernardbregant3@gmail.com</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer menu">
+          <a href="./index.html">Domov</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </footer>
+
+  <script>
+    let ciscenjeIdx = 0;
+    const ciscenjeCount = 6;
+    function ciscenjeUpdate() {
+      document.getElementById('ciscenjeTrack').style.transform = `translateX(-${ciscenjeIdx * 100}%)`;
+      document.querySelectorAll('#ciscenjeDots span').forEach((d, i) => d.classList.toggle('active', i === ciscenjeIdx));
+    }
+    function ciscenjeNext() { ciscenjeIdx = (ciscenjeIdx + 1) % ciscenjeCount; ciscenjeUpdate(); }
+    function ciscenjePrev() { ciscenjeIdx = (ciscenjeIdx - 1 + ciscenjeCount) % ciscenjeCount; ciscenjeUpdate(); }
+    function ciscenjeGo(i) { ciscenjeIdx = i; ciscenjeUpdate(); }
+    setInterval(ciscenjeNext, 4000);
+  </script>
+  <script>
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          links.classList.remove('open');
+        });
+      });
+    })();
+  </script>
+  </body>
+</html>

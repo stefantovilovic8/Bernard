@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asistenca – Prva Izbira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .hero {
+        min-height: 72vh;
+        background: linear-gradient(to bottom, #1a2635 0%, #2b4060 40%, #5a7a9e 70%, #c4d4e8 88%, #ffffff 100%);
+      }
+      .hero-media { display: none; }
+      .hero-overlay { background: none; align-items: start; padding-top: 12rem; }
+      .hero-content { color: #ffffff; margin-left: 2rem; margin-right: auto; max-width: 700px; }
+      .hero-content h1 { color: #ffffff; }
+      .hero-content .lead { color: rgba(255,255,255,0.88); }
+      .hero-content .eyebrow { color: rgba(255,255,255,0.72); }
+
+      .intro-section { padding: 4rem 0 3rem; background: var(--white); }
+      .intro-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+      .intro-image { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+      .intro-image img { width: 100%; height: 380px; object-fit: cover; display: block; }
+      .intro-text .eyebrow { margin-bottom: 0.5rem; }
+      .intro-text h2 { margin-bottom: 1rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+      .intro-text p { color: var(--muted); line-height: 1.7; margin-bottom: 0.8rem; }
+
+      .services-section { padding: 4rem 0; background: var(--bg); }
+      .section-header { text-align: center; margin-bottom: 3rem; }
+      .section-header h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-top: 0.4rem; }
+
+      .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+      .svc-card {
+        background: var(--white); border-radius: var(--radius);
+        border: 1px solid rgba(182,194,184,0.45);
+        box-shadow: 0 8px 28px rgba(24,34,26,0.07);
+        padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 0.6rem;
+        opacity: 0; transform: translateY(18px); animation: rise 0.6s ease forwards;
+      }
+      .svc-card:nth-child(2) { animation-delay: 80ms; }
+      .svc-card:nth-child(3) { animation-delay: 160ms; }
+      .svc-card:nth-child(4) { animation-delay: 220ms; }
+      .svc-card .icon { width: 46px; height: 46px; background: rgba(69,98,75,0.10); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.3rem; }
+      .svc-card .icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+      .svc-card h3 { font-size: 1.08rem; color: var(--ink); margin: 0; }
+      .svc-card p { font-size: 0.94rem; color: var(--muted); margin: 0; line-height: 1.65; }
+
+      .cta-section { padding: 3rem 0 4rem; background: var(--bg); text-align: center; }
+      .cta-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.75rem; }
+      .cta-section .sub { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+      .cta-btn {
+        display: inline-block; background: #1a3a5c; color: #fff;
+        border-radius: 999px; padding: 0.95rem 2.2rem;
+        font-family: "Manrope", sans-serif; font-weight: 800; font-size: 1rem;
+        letter-spacing: 0.02em; text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+      .cta-btn:hover { background: #0b1f3a; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(4,12,7,0.22); }
+
+      @media (max-width: 900px) { .intro-inner { grid-template-columns: 1fr; gap: 2rem; } .svc-grid { grid-template-columns: 1fr; } }
+      @media (max-width: 600px) { .hero-content { margin-left: 1rem; } }
+    </style>
+  </head>
+  <body>
+
+    <header class="hero" id="vrh">
+      <nav class="top-nav container">
+        <a class="brand" href="./index.html">
+          <img class="brand-logo" src="./logo.webp" alt="Prva Izbira" />
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#storitve">Storitve</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+      <div class="hero-media"></div>
+      <div class="hero-overlay">
+        <div class="hero-content container">
+          <p class="eyebrow">Osebna asistenca</p>
+          <h1>Dostojanstvena pomoč in spremstvo za vaše najbližje</h1>
+          <p class="lead">
+            Naš cilj je olajšati vsakdan starejšim in invalidnim osebam. Nudimo topel človeški stik in zanesljivo logistično podporo.
+          </p>
+          <a class="cta" href="./kontakt.html">Oddaj povpraševanje</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="intro-section">
+        <div class="container intro-inner">
+          <div class="intro-image">
+            <img
+              src="./asistenca-intro.png"
+              alt="Asistent pomaga starejši osebi"
+            />
+          </div>
+          <div class="intro-text">
+            <p class="eyebrow">O naši storitvi</p>
+            <h2>Zanesljiva pomoč, ko jo najbolj potrebujete</h2>
+            <p>Razumemo, kako pomembna je neodvisnost in dostojanstvo v vsakdanjem življenju. Naši asistenti so zanesljivi, topli in diskretni.</p>
+            <p>Storitev je prilagodljiva – enkratna ali redna – in dostopna po celi Sloveniji.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="services-section" id="storitve">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Naše storitve</p>
+            <h2>Kaj ponujamo?</h2>
+          </div>
+          <div class="svc-grid">
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+              </div>
+              <h3>Pomoč pri nakupih in v trgovino</h3>
+              <p>Prevoz in pomoč pri nakupovanju živil, zdravil ali ostalega – hitro in brez stresa.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <h3>Družabništvo in obisk delavnic</h3>
+              <p>Spremstvo na kulturne, socialne ali prostočasne aktivnosti. Ker je vsak izhod dragocen.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+              </div>
+              <h3>Spremstvo in vožnja k zdravniku</h3>
+              <p>Prevoz na preglede, terapije ali v lekarno – vedno točno in brez skrbi za parkiranje.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <h3>Osnovna pomoč na domu in osebna asistenca</h3>
+              <p>Pomoč pri vsakodnevnih opravilih, ki zagotavljajo varno in dostojanstveno bivanje doma.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+              </div>
+              <h3>Priprava obrokov in gospodinjstvo</h3>
+              <p>Pomagamo pri pripravi obrokov, pospravljanju in osnovnih gospodinjskih opravilih ter pomoči pri oblačenju.</p>
+            </div>
+
+            <div class="svc-card">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              </div>
+              <h3>Obisk banke, pošte in ustanov</h3>
+              <p>Organiziramo prevoz in nudimo spremstvo na banko, pošto ali druge ustanove – brez skrbi in stresa.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container">
+          <h2>Potrebujete pomoč na domu?</h2>
+          <p class="sub">Pišite nam in skupaj bomo našli rešitev, ki ustreza vašim potrebam.</p>
+          <a class="cta-btn" href="./kontakt.html">Oddaj povpraševanje</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer id="kontakt">
+      <div class="container footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
+          <p>+386 31 675 241</p>
+          <p>bernardbregant3@gmail.com</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer menu">
+          <a href="./index.html">Domov</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </footer>
+
+  <script>
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          links.classList.remove('open');
+        });
+      });
+    })();
+  </script>
+  </body>
+</html>

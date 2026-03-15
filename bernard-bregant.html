@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bernard Bregant – Prva Izbira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      :root {
+        --ink-dark: #0e0e0e;
+        --stone: #f4f2ef;
+        --stone-2: #e8e4de;
+        --gold: #b89a5a;
+      }
+
+      /* ── Hero ─────────────────────────────────────────────── */
+      .bb-hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #0e0e0e;
+        overflow: hidden;
+      }
+      .bb-hero-video {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .bb-hero-video video {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        filter: grayscale(40%) brightness(0.55);
+      }
+      .bb-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.6) 100%);
+        z-index: 1;
+      }
+      .bb-hero-nav {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.8rem 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .bb-back {
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        font-family: 'Manrope', sans-serif;
+        font-weight: 600;
+        font-size: 0.92rem;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: color 180ms ease;
+      }
+      .bb-back:hover { color: #fff; }
+      .bb-hero-content {
+        position: relative;
+        z-index: 2;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3rem 2rem 6rem;
+      }
+      .bb-hero-content .eyebrow {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.2rem;
+      }
+      .bb-hero-content h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin: 0 0 1rem;
+      }
+      .bb-hero-content .subtitle {
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: rgba(255,255,255,0.78);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        max-width: 520px;
+      }
+      .bb-divider {
+        width: 60px;
+        height: 2px;
+        background: var(--gold);
+        margin: 1.6rem auto 0;
+      }
+
+      /* ── Biography ────────────────────────────────────────── */
+      .bb-bio {
+        background: #fff;
+        padding: 6rem 2rem;
+      }
+      .bb-bio-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .bb-bio-inner .section-label {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.2rem;
+      }
+      .bb-bio-inner h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+        font-weight: 700;
+        color: var(--ink-dark);
+        margin-bottom: 2rem;
+        line-height: 1.2;
+      }
+      .bb-bio-inner p {
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 1.08rem;
+        line-height: 1.8;
+        color: #4a4a4a;
+      }
+
+      /* ── Milestones ───────────────────────────────────────── */
+      .bb-milestones {
+        background: var(--stone);
+        padding: 5rem 2rem;
+      }
+      .bb-milestones-inner {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .bb-milestones-inner .section-label {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.8rem;
+        text-align: center;
+      }
+      .bb-milestones-inner h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        font-weight: 700;
+        color: var(--ink-dark);
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+      .bb-milestones-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.8rem;
+      }
+      .bb-milestone-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 2.8rem 2.2rem;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.05);
+        border-top: 1.5px solid #C5A059;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      .bb-milestone-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.1), 0 16px 48px rgba(0,0,0,0.07);
+      }
+      .bb-milestone-card .icon {
+        margin-bottom: 1.4rem;
+        display: flex;
+        align-items: center;
+      }
+      .bb-milestone-card .icon svg {
+        width: 36px;
+        height: 36px;
+        stroke: #C5A059;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .bb-milestone-card h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--ink-dark);
+        margin-bottom: 0.8rem;
+        letter-spacing: -0.01em;
+      }
+      .bb-milestone-card p {
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.97rem;
+        line-height: 1.7;
+        color: #5a5a5a;
+        margin: 0;
+      }
+
+      /* ── Vision ───────────────────────────────────────────── */
+      .bb-vision {
+        background: var(--ink-dark);
+        padding: 6rem 2rem;
+        text-align: center;
+      }
+      .bb-vision-inner {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+      .bb-vision-inner .section-label {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.4rem;
+      }
+      .bb-vision-inner blockquote {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+        font-style: italic;
+        font-weight: 600;
+        color: rgba(255,255,255,0.92);
+        line-height: 1.55;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+      .bb-vision-divider {
+        width: 50px;
+        height: 2px;
+        background: var(--gold);
+        margin: 2.2rem auto 0;
+      }
+
+      /* ── CTA footer ───────────────────────────────────────── */
+      .bb-footer-cta {
+        background: var(--stone);
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+      .bb-footer-cta h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        font-weight: 700;
+        color: var(--ink-dark);
+        margin-bottom: 1.8rem;
+      }
+      .bb-btn {
+        display: inline-block;
+        background: var(--ink-dark);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.9rem 2.2rem;
+        font-family: 'Manrope', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        margin: 0 0.5rem;
+        transition: background 180ms ease, transform 180ms ease;
+      }
+      .bb-btn:hover { background: #2a2a2a; transform: translateY(-2px); }
+      .bb-btn.outline {
+        background: transparent;
+        border: 2px solid var(--ink-dark);
+        color: var(--ink-dark);
+      }
+      .bb-btn.outline:hover { background: var(--ink-dark); color: #fff; }
+
+      /* ── Footer override ──────────────────────────────────── */
+      footer {
+        background: #f4f2ef !important;
+        color: #1a1a1a !important;
+      }
+      footer h3, footer p, footer a {
+        color: #1a1a1a !important;
+      }
+
+      /* Responsive */
+      @media (max-width: 700px) {
+        .bb-milestones-grid { grid-template-columns: 1fr; }
+        .bb-hero-nav { padding: 1.2rem 1.2rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ═══════ HERO ═══════════════════════════════════════════ -->
+    <section class="bb-hero">
+      <div class="bb-hero-video">
+        <video autoplay loop muted playsinline src="./hero-video.mp4"></video>
+      </div>
+      <div class="bb-hero-overlay"></div>
+
+      <nav class="bb-hero-nav">
+        <a href="./index.html" style="line-height:0;">
+          <img src="./logo.webp" alt="Prva Izbira" style="height:44px;width:auto;" />
+        </a>
+        <div style="display:flex;gap:1.4rem;align-items:center;">
+          <a class="bb-back" href="./index.html">← Nazaj na domačo stran</a>
+          <a class="bb-back" href="./kontakt.html">Kontakt</a>
+        </div>
+      </nav>
+
+      <div class="bb-hero-content">
+        <p class="eyebrow">Ustanovitelj &amp; Vizionar</p>
+        <h1>Bernard Bregant</h1>
+        <p class="subtitle">Ustanovitelj, konjenik in podjetnik</p>
+        <div class="bb-divider"></div>
+      </div>
+    </section>
+
+    <!-- ═══════ BIOGRAPHY ═══════════════════════════════════════ -->
+    <section class="bb-bio">
+      <div class="bb-bio-inner">
+        <p class="section-label">O meni</p>
+        <h2>Strast, ki je postala poslanstvo</h2>
+        <p>
+          Bernard Bregant je svojo pot začel s strastjo do narave in živali, kar se je kasneje razvilo v uspešno podjetniško zgodbo. Kot profesionalni konjenik in strokovnjak na področju transporta ter logistike, združuje disciplino športnika z natančnostjo poslovneža.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════ MILESTONES ═══════════════════════════════════════ -->
+    <section class="bb-milestones">
+      <div class="bb-milestones-inner">
+        <p class="section-label">Ključni mejniki</p>
+        <h2>Pot do danes</h2>
+        <div class="bb-milestones-grid">
+          <div class="bb-milestone-card">
+            <div class="icon">
+              <!-- Horse head icon -->
+              <svg viewBox="0 0 24 24"><path d="M19 3c-1 0-2 .4-2.7 1.1L14 6.5 12 5l-2 2 1 1-4 4H5a2 2 0 0 0-2 2v2h2v3h3v-2h1v2h3v-3l4-2 1 1 2-2-1.5-2L19 9V3z"/></svg>
+            </div>
+            <h3>Konjeništvo</h3>
+            <p>Večletne izkušnje v preskakovanju ovir in vzreji športnih konjev pod imenom BB Team.</p>
+          </div>
+          <div class="bb-milestone-card">
+            <div class="icon">
+              <!-- Leaf / plant icon -->
+              <svg viewBox="0 0 24 24"><path d="M12 22c0 0-8-4-8-12a8 8 0 0 1 16 0c0 8-8 12-8 12z"/><line x1="12" y1="22" x2="12" y2="11"/></svg>
+            </div>
+            <h3>Inovacije</h3>
+            <p>Razvoj trajnostnih rešitev, kot je konopljin nastilj za male živali.</p>
+          </div>
+          <div class="bb-milestone-card">
+            <div class="icon">
+              <!-- Briefcase icon -->
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3>Podjetništvo</h3>
+            <p>Ustanovitev in vodenje specializiranih storitev za selitve in asistenco na domu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ VISION ══════════════════════════════════════════ -->
+    <section class="bb-vision">
+      <div class="bb-vision-inner">
+        <p class="section-label">Vizija</p>
+        <blockquote>
+          "Moja vizija je ustvariti prostor, kjer se kakovostne storitve srečajo z osebnim pristopom. Verjamem v pošteno delo, spoštovanje tradicije in nenehen razvoj."
+        </blockquote>
+        <div class="bb-vision-divider"></div>
+      </div>
+    </section>
+
+    <!-- ═══════ FOOTER CTA ══════════════════════════════════════ -->
+    <section class="bb-footer-cta">
+      <h3>Stopite v stik ali spoznajte našo ponudbo</h3>
+      <a class="bb-btn" href="./kontakt.html">Kontaktirajte nas</a>
+      <a class="bb-btn outline" href="./index.html">Nazaj na domačo stran</a>
+    </section>
+
+    <footer id="kontakt">
+      <div class="container footer-inner">
+        <div class="contact">
+          <h3>Kontakt</h3>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
+          <p>+386 31 675 241</p>
+          <p>bernardbregant3@gmail.com</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer menu">
+          <a href="./index.html">Domov</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </nav>
+      </div>
+    </footer>
+
+  </body>
+</html>

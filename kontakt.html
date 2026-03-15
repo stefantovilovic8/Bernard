@@ -2,8 +2,9 @@
 <html lang="sl">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kontakt – Bregant in Bregant d.o.o.</title>
+    <title>Kontakt – Prva Izbira</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -134,7 +135,7 @@
       .submit-btn {
         width: 100%;
         padding: 0.95rem;
-        background: #45624b;
+        background: #1a3a5c;
         color: #fff;
         border: none;
         border-radius: 999px;
@@ -246,8 +247,10 @@
     <!-- Top bar -->
     <div class="contact-topbar">
       <div class="container inner">
+        <a href="./index.html" style="line-height:0;">
+          <img src="./logo.webp" alt="Prva Izbira" style="height:40px;width:auto;" />
+        </a>
         <a class="back-link" href="./index.html">← Nazaj na glavno stran</a>
-        <span class="brand-name">Bregant in Bregant d.o.o.</span>
       </div>
     </div>
 
@@ -264,17 +267,11 @@
       <div class="container">
         <div class="form-card">
 
-          <!-- FormSubmit.co sends form data to the specified email — no backend needed -->
-          <form
-            action="https://formsubmit.co/Bernardbregant3@gmail.com"
-            method="POST"
-            id="contact-form"
-          >
-            <!-- FormSubmit config -->
+          <!-- FormSubmit.co sends form data via AJAX — no redirect URL needed -->
+          <form id="contact-form">
             <input type="hidden" name="_subject" value="Novo povpraševanje – Bregant in Bregant d.o.o." />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://bregant.si/kontakt.html?success=1" />
 
             <div class="form-row">
               <div class="field">
@@ -288,6 +285,11 @@
             </div>
 
             <div class="field">
+              <label for="telefon">Telefonska številka</label>
+              <input type="tel" id="telefon" name="Telefon" placeholder="+386 XX XXX XXX" />
+            </div>
+
+            <div class="field">
               <label for="email">E-mail naslov</label>
               <input type="email" id="email" name="Email" placeholder="vas@email.com" required />
             </div>
@@ -296,10 +298,12 @@
               <label for="storitev">Storitev</label>
               <select id="storitev" name="Storitev">
                 <option value="">– Izberite storitev –</option>
-                <option>Konjeniški center Bregant</option>
-                <option>Konopljino nastilje</option>
+                <option>Konjeniški center Spartakus</option>
+                <option>Konopljin nastilj za male živali ali vrt</option>
                 <option>Čiščenje steklenih površin</option>
                 <option>Selitveni servis</option>
+                <option>Pomoč invalidom in starejšim osebam</option>
+                <option>Varstvo živali</option>
                 <option>Splošno povpraševanje</option>
               </select>
             </div>
@@ -355,30 +359,52 @@
     </div>
 
     <!-- Footer -->
-    <footer>
+    <footer id="kontakt-footer">
       <div class="container footer-inner">
         <div class="contact">
           <h3>Kontakt</h3>
-          <p>BREGANT IN BREGANT d.o.o.</p>
-          <p>Slivniška ulica , 2312 Orehova vas</p>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
           <p>+386 31 675 241</p>
-          <p>Bernardbregant3@gmail.com</p>
+          <p>bernardbregant3@gmail.com</p>
         </div>
         <nav class="footer-nav" aria-label="Footer menu">
           <a href="./index.html">Domov</a>
-          <a href="./konjeniski-center.html">Konjeniški center</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
           <a href="./kontakt.html">Kontakt</a>
         </nav>
       </div>
     </footer>
 
     <script>
-      // Show success message if redirected back with ?success=1
-      if (new URLSearchParams(window.location.search).get('success') === '1') {
-        document.getElementById('contact-form').style.display = 'none';
-        const msg = document.getElementById('success-msg');
-        msg.style.display = 'block';
-      }
+      document.getElementById('contact-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('.submit-btn');
+        btn.textContent = 'Pošiljam…';
+        btn.disabled = true;
+
+        const data = new FormData(form);
+        try {
+          const res = await fetch('https://formsubmit.co/ajax/Bernardbregant3@gmail.com', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: data
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+          } else {
+            btn.textContent = 'Napaka – poskusite znova';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Napaka – preverite povezavo';
+          btn.disabled = false;
+        }
+      });
     </script>
 
   </body>

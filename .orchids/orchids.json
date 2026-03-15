@@ -5,5 +5,7 @@
   "startupCommands": [
     "true; python3 -m http.server 4173"
   ],
-  "templateId": "auto"
+  "templateId": "auto",
+  "vercelProjectId": "prj_tZzF7nGjLc2iDo6LDiq1rYyQuDg6",
+  "deployedWithUserToken": false
 }

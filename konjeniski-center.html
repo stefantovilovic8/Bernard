@@ -2,8 +2,9 @@
 <html lang="sl">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konjeniški center – Zajčja Dobrava</title>
+    <title>Konjeniški center – Prva Izbira</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -185,6 +186,38 @@
         box-shadow: 0 12px 28px rgba(4,12,7,0.26);
       }
 
+      /* Clickable cards */
+      .svc-card { cursor: pointer; }
+      .svc-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(24,34,26,0.14);
+      }
+      .svc-card.selected {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent), 0 16px 36px rgba(24,34,26,0.14);
+        transform: translateY(-4px);
+      }
+      .svc-offer-btn {
+        display: none;
+        margin-top: 1rem;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.6rem 1.5rem;
+        font-family: "Manrope", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: background 180ms ease, transform 180ms ease;
+      }
+      .svc-card.selected .svc-offer-btn {
+        display: inline-block;
+      }
+      .svc-offer-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
       /* Responsive */
       @media (max-width: 900px) {
         .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -193,6 +226,7 @@
         .services-grid { grid-template-columns: 1fr; }
         .cta-banner-overlay { padding: 4rem 0; }
       }
+      footer { background: linear-gradient(135deg, #1a3a1e 0%, #2e6b35 50%, #4a8a52 100%); }
     </style>
   </head>
   <body>
@@ -202,9 +236,15 @@
     ════════════════════════════════════════════════════════ -->
     <header class="hero" id="vrh">
       <nav class="top-nav container">
-        <a class="brand" href="./index.html">← Nazaj</a>
-        <div class="nav-links">
+        <a class="brand" href="./index.html">
+          <img class="brand-logo" src="./logo.webp" alt="Prva Izbira" />
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
           <a href="#storitve">Storitve</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
           <a href="./kontakt.html">Kontakt</a>
         </div>
       </nav>
@@ -220,9 +260,9 @@
 
       <div class="hero-overlay">
         <div class="hero-content container">
-          <h1>Konjeniški center na posestvu v Zajčji dobravi</h1>
+          <h1>Konjeniški center v Zajčji dobravi</h1>
           <p class="lead">
-            Odkrijte harmonijo med naravo in konji v osrčju Polja. Ponujamo strokovno vodenje, učenje in nepozabna doživetja.
+            Odkrijte harmonijo med naravo in konji v osrčju polja. Ponujamo strokovno vodenje, ujahovanje in šolo jahanja, ter druga nepozabna doživetja.
           </p>
           <a class="cta" href="./kontakt.html">Kontaktirajte nas</a>
         </div>
@@ -256,8 +296,9 @@
                 </div>
               </div>
               <div class="svc-body">
-                <h3>Strokovno ujahovanje konj</h3>
-                <p>Strokovno delo z mladimi konji v angleškem stilu.</p>
+                <h3>Ujahovanje konj</h3>
+                <p>Strokovno delo z mladimi konji.</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -276,6 +317,7 @@
               <div class="svc-body">
                 <h3>Šola jahanja (jahač 1 in 2)</h3>
                 <p>Tečaji za začetnike in nadaljevalce pod budnim očesom mentorjev.</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -283,7 +325,7 @@
             <article class="svc-card">
               <div class="svc-photo">
                 <img
-                  src="./terensko-jahanje.webp"
+                  src="./terensko-jahanje.png"
                   alt="Vodeno terensko jahanje v naravi"
                 />
                 <div class="svc-badge" aria-hidden="true">
@@ -292,8 +334,9 @@
                 </div>
               </div>
               <div class="svc-body">
-                <h3>Vodeno terensko jahanje</h3>
-                <p>Sproščujoči izleti v naravo za izkušene jahače.</p>
+                <h3>Terensko jahanje</h3>
+                <p>Sproščujoči izleti v naravo za izkušene in neizkušene jahače.</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -311,7 +354,8 @@
               </div>
               <div class="svc-body">
                 <h3>Poni kotiček (2-7 let)</h3>
-                <p>Prvi stiki s konji za naše najmlajše obiskovalce.</p>
+                <p>Prvi stiki s konji za naše najmlajše obiskovalce. Poni krožci in poni delavnice.</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -319,7 +363,7 @@
             <article class="svc-card">
               <div class="svc-photo">
                 <img
-                  src="./rojstni-dnevi.webp"
+                  src="./rojstni-dnevi.png"
                   alt="Rojstni dnevi s konji"
                 />
                 <div class="svc-badge" aria-hidden="true">
@@ -329,7 +373,8 @@
               </div>
               <div class="svc-body">
                 <h3>Rojstni dnevi s konji</h3>
-                <p>Nepozabna 2,5-urna zabava na posestvu!</p>
+                <p>Nepozabna 2,5-urna zabava na posestvu in tabori za otroke!</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -348,6 +393,7 @@
               <div class="svc-body">
                 <h3>Team Building</h3>
                 <p>Edinstveni programi za podjetja in skupine.</p>
+                <a class="svc-offer-btn" href="./kontakt.html">Pridobi ponudbo</a>
               </div>
             </article>
 
@@ -365,6 +411,19 @@
         </div>
       </section>
 
+      <section style="padding:0 0 4rem;background:var(--bg);">
+        <div class="container">
+          <video
+            src="./konjeniski-video.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            style="width:100%;border-radius:var(--radius);box-shadow:var(--shadow);display:block;"
+          ></video>
+        </div>
+      </section>
+
     </main>
 
     <!-- ═══════════════════════════════════════════════════════
@@ -374,18 +433,48 @@
       <div class="container footer-inner">
         <div class="contact">
           <h3>Kontakt</h3>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
           <p>+386 31 675 241</p>
-          <p>konji@zajcja-dobrava.si</p>
-          <p>Zajčja Dobrava, Polje, Slovenija</p>
+          <p>bernardbregant3@gmail.com</p>
         </div>
         <nav class="footer-nav" aria-label="Footer menu">
-          <a href="./index.html">← Nazaj na glavno stran</a>
-          <a href="#vrh">Domov</a>
-          <a href="#storitve">Storitve</a>
+          <a href="./index.html">Domov</a>
+          <a href="./index.html#ponudba">Ponudba</a>
+          <a href="./index.html#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
           <a href="./kontakt.html">Kontakt</a>
         </nav>
       </div>
     </footer>
 
+  <script>
+    document.querySelectorAll('.svc-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.svc-offer-btn')) return;
+        var isSelected = card.classList.contains('selected');
+        document.querySelectorAll('.svc-card').forEach(function(c) {
+          c.classList.remove('selected');
+        });
+        if (!isSelected) card.classList.add('selected');
+      });
+    });
+  </script>
+  <script>
+    (function() {
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          toggle.classList.remove('open');
+          links.classList.remove('open');
+        });
+      });
+    })();
+  </script>
   </body>
 </html>

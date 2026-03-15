@@ -2,56 +2,256 @@
 <html lang="sl">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="./logo.webp" type="image/webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Family Estate Services</title>
+    <title>Prva Izbira</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
     <style>
-      /* ── Hero: pure gradient, no photo ───────────────────── */
+      /* ── Hero: animated navy mesh gradient ──────────────── */
       #home {
-        background: linear-gradient(to bottom, #0b1f3a 0%, #1a3a5c 30%, #4a7ea5 62%, #b8d4e8 82%, #ffffff 100%);
+        background: linear-gradient(to bottom, #071628 0%, #0b1f3a 25%, #133a6e 55%, #1e6099 78%, #4a9fd4 100%);
       }
       #home .hero-media { display: none; }
+
+      /* Mesh blobs — navy/royal blue palette */
+      .mesh-bg {
+        position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;
+      }
+      .blob {
+        position: absolute; border-radius: 50%; filter: blur(100px); will-change: transform;
+      }
+      /* Deep navy — top anchor */
+      .blob-1 {
+        width: 75%; height: 75%;
+        background: radial-gradient(circle, rgba(10,28,60,0.9) 0%, transparent 65%);
+        top: -20%; left: -20%;
+        animation: drift1 35s ease-in-out infinite alternate;
+      }
+      /* Royal blue — mid */
+      .blob-2 {
+        width: 60%; height: 60%;
+        background: radial-gradient(circle, rgba(30,80,160,0.55) 0%, transparent 65%);
+        top: 15%; right: -15%;
+        animation: drift2 40s ease-in-out infinite alternate;
+      }
+      /* Soft blue — centre depth */
+      .blob-3 {
+        width: 50%; height: 55%;
+        background: radial-gradient(circle, rgba(60,120,200,0.35) 0%, transparent 65%);
+        top: 30%; left: 20%;
+        animation: drift3 30s ease-in-out infinite alternate;
+      }
+      /* Near-white fade — bottom */
+      .blob-4 {
+        width: 80%; height: 45%;
+        background: radial-gradient(circle, rgba(200,228,248,0.45) 0%, transparent 65%);
+        bottom: -10%; left: 10%;
+        animation: drift4 38s ease-in-out infinite alternate;
+      }
+      /* Subtle highlight — top-left light leak */
+      .blob-5 {
+        width: 45%; height: 45%;
+        background: radial-gradient(ellipse 55% 50% at 0% 0%, rgba(100,160,220,0.18) 0%, transparent 70%);
+        top: 0; left: 0;
+        filter: blur(50px);
+        animation: none;
+      }
+
+      @keyframes drift1 {
+        0%   { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(5%, 8%) scale(1.04); }
+      }
+      @keyframes drift2 {
+        0%   { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(-4%, -6%) scale(0.97); }
+      }
+      @keyframes drift3 {
+        0%   { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(-5%, 5%) scale(1.05); }
+      }
+      @keyframes drift4 {
+        0%   { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(4%, -4%) scale(1.03); }
+      }
+
       #home .hero-overlay {
         background: none;
-        align-items: start;
-        padding-top: 14rem;
+        align-items: center;
+        justify-content: center;
       }
       #home .hero-content {
         color: #ffffff;
-        margin-left: 2rem;
+        text-align: center;
+        margin-left: auto;
         margin-right: auto;
+        max-width: 780px;
       }
-      #home .lead { color: rgba(255,255,255,0.88); }
-      #home .eyebrow { color: rgba(255,255,255,0.72); }
-      #home .brand {
+      #home .hero-content h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.2rem;
+      }
+      #home .lead {
+        color: rgba(255,255,255,0.88);
+        font-size: 1.1rem;
+        text-align: center;
+        max-width: 100%;
+      }
+      #home .eyebrow { color: rgba(255,255,255,0.70); text-align: center; }
+
+      /* ── Split-menu nav (desktop) ───────────────────────── */
+      #home .top-nav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding-top: 1.8rem;
+        padding-bottom: 0.4rem;
+        gap: 0;
+      }
+      /* Hide mobile-only elements on desktop */
+      #home .nav-toggle { display: none !important; }
+      #home .nav-links  { display: none !important; }
+
+      .nav-left, .nav-right {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .nav-left  { justify-content: flex-end;   padding-right: 2.5rem; }
+      .nav-right { justify-content: flex-start;  padding-left:  2.5rem; }
+      .nav-left a, .nav-right a {
+        color: rgba(255,255,255,0.9);
+        font-family: 'Manrope', sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+        transition: color 160ms ease, opacity 160ms ease;
+        position: relative;
+      }
+      .nav-left a::after, .nav-right a::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; left: 0; right: 0;
+        height: 1px;
+        background: rgba(255,255,255,0.7);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 220ms ease;
+      }
+      .nav-left a:hover, .nav-right a:hover { color: #fff; }
+      .nav-left a:hover::after, .nav-right a:hover::after { transform: scaleX(1); }
+
+      /* ── Mobile: standard logo-left / hamburger-right ──── */
+      @media (max-width: 820px) {
+        #home .top-nav {
+          display: flex !important;
+          justify-content: space-between;
+          padding-top: 1.2rem;
+        }
+        .nav-left, .nav-right { display: none !important; }
+        #home .nav-toggle { display: flex !important; }
+        #home .nav-links  { display: none !important; }
+        #home .nav-links.open { display: flex !important; }
+      }
+
+      .hero-cta {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.9rem 2.4rem;
+        background: #ffffff;
+        color: #111614;
+        font-family: 'Manrope', sans-serif;
         font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        border-radius: var(--radius);
+        text-decoration: none;
+        transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+        box-shadow: 0 4px 20px rgba(69,98,75,0.45);
+      }
+      .hero-cta:hover {
+        background: rgba(255,255,255,0.88);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+      }
+
+      .scroll-arrow {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: pulse 2.2s ease-in-out infinite;
+        z-index: 3;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .scroll-arrow svg {
+        width: 64px;
+        height: 64px;
+        stroke: #ffffff;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.6; }
+        50% { transform: translateX(-50%) translateY(8px) scale(1.08); opacity: 1; }
       }
     </style>
   </head>
   <body>
     <header class="hero" id="home">
       <nav class="top-nav container">
-        <a class="brand" href="#home">BREGANT IN BREGANT D.O.O.</a>
-        <div class="nav-links">
+        <!-- Left links -->
+        <div class="nav-left">
+          <a href="#home">Domov</a>
           <a href="#ponudba">Ponudba</a>
           <a href="#onas">O nas</a>
+        </div>
+        <!-- Centered logo -->
+        <a class="brand" href="./index.html">
+          <img class="brand-logo" src="./logo.webp" alt="Prva Izbira" />
+        </a>
+        <!-- Right links -->
+        <div class="nav-right">
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
+          <a href="./kontakt.html">Kontakt</a>
+        </div>
+        <!-- Mobile only: hamburger + dropdown -->
+        <button class="nav-toggle" id="navToggle" aria-label="Odpri meni">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Domov</a>
+          <a href="#ponudba">Ponudba</a>
+          <a href="#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
           <a href="./kontakt.html">Kontakt</a>
         </div>
       </nav>
 
-      <div class="hero-media">
-        <img
-          src="https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=2200&q=80"
-          alt="Konj na podeželskem posestvu ob sončnem zahodu"
-        />
+      <div class="mesh-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
       </div>
 
       <div class="hero-overlay">
@@ -61,54 +261,56 @@
           <p class="lead">
             Zaupajte tradiciji, strokovnosti in zanesljivosti na enem mestu. Spoznajte našo ponudbo, ki sega od konjeniškega centra do specializiranih selitvenih in čistilnih storitev.
           </p>
-          <a class="cta" href="#ponudba">Spoznajte našo ponudbo</a>
+          <a href="#ponudba" class="hero-cta">Spoznajte našo ponudbo</a>
         </div>
       </div>
+      <a class="scroll-arrow" href="#ponudba" aria-label="Pomakni se navzdol">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </header>
 
     <main>
       <section class="hub container" id="ponudba">
         <article class="service-card">
-          <img
-            src="./konjeniski-center-card.png"
-            alt="Konjeniški center Bregant"
-          />
+          <img src="./konjeniski-center-card.png" alt="Konjeniški center Bregant" />
           <div class="service-content">
-            <h2>Konjeniški center Bregant</h2>
+            <h2>Jahanje in ujahovanje konj</h2>
             <a href="./konjeniski-center.html">Vstopi v svet konj</a>
           </div>
         </article>
-
         <article class="service-card">
-          <img
-            src="./konopljino-nastilje-card.png"
-            alt="Konopljino nastilje"
-          />
+          <img src="./konopljino-nastilje-card.png" alt="Konopljin nastilj" />
           <div class="service-content">
-            <h2>Konopljino nastilje</h2>
-            <a href="./kontakt.html">Vrhunska podlaga za živali</a>
+            <h2>Konopljin nastilj</h2>
+            <a href="./konopljino-nastilje.html">Vrhunska podlaga za živali</a>
           </div>
         </article>
-
         <article class="service-card">
-          <img
-            src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85&crop=top"
-            alt="Profesionalna čistilka čisti stekleno površino s squeegeejem"
-          />
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85&crop=top" alt="Čistilni servis" />
           <div class="service-content">
-            <h2>Čiščenje steklenih površin</h2>
-            <a href="./kontakt.html">Do popolnega sijaja</a>
+            <h2>Čistilni servis</h2>
+            <a href="./ciscenje.html">Do popolnega sijaja</a>
           </div>
         </article>
-
         <article class="service-card">
-          <img
-            src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=1200&q=80"
-            alt="Selitveni servis in varen prevoz opreme"
-          />
+          <img src="./selitve-card.png" alt="Selitveni servis" />
           <div class="service-content">
             <h2>Selitveni servis</h2>
-            <a href="./kontakt.html">Hitre in varne selitve</a>
+            <a href="./selitve.html">Hitre in varne selitve</a>
+          </div>
+        </article>
+        <article class="service-card">
+          <img src="./pasje-card.png" alt="Pasje varstvo" />
+          <div class="service-content">
+            <h2>Pasje varstvo</h2>
+            <a href="./pasje-varstvo.html">Varno varstvo vašega psa</a>
+          </div>
+        </article>
+        <article class="service-card">
+          <img src="./asistenca-card.png" alt="Osebna asistenca in pomoč starejšim" />
+          <div class="service-content">
+            <h2>Pomoč invalidom in starejšim osebam</h2>
+            <a href="./asistenca.html">Zanesljiva pomoč na domu</a>
           </div>
         </article>
       </section>
@@ -124,7 +326,7 @@
           <div class="about-content">
             <p class="eyebrow">O nas</p>
             <h2>Zgodba o tradiciji in zanesljivosti</h2>
-            <p>Pri podjetju Bregant &amp; Bregant d.o.o. verjamemo, da so najboljše rešitve tiste, ki temeljijo na zaupanju in poštenem delu. Naša zgodba se je začela na posestvu, kjer sta ljubezen do konj in narave postavili temelje za vse, kar počnemo danes.</p>
+            <p>Pri podjetju Bernard Bregant s.p. verjamemo, da so najboljše rešitve tiste, ki temeljijo na zaupanju in poštenem delu. Naša zgodba se je začela na posestvu, kjer sta ljubezen do konj in narave postavili temelje za vse, kar počnemo danes.</p>
             <p>Morda se naše storitve – od konjeništva do selitev in čiščenja – zdijo raznolike, a vse združuje ista obljuba: brezpogojna kakovost in osebni pristop.</p>
             <p style="font-weight:700;margin-top:1rem;margin-bottom:0.5rem;">Zakaj izbrati nas?</p>
             <p><strong>Družinska predanost:</strong> Vsaka stranka za nas ni le številka, ampak partner, ki mu namenimo polno pozornost.</p>
@@ -139,18 +341,33 @@
       <div class="container footer-inner">
         <div class="contact">
           <h3>Kontakt</h3>
-          <p>BREGANT IN BREGANT d.o.o.</p>
-          <p>Slivniška ulica , 2312 Orehova vas</p>
-          <p>+386 40 123 456</p>
+          <p>Bernard Bregant s.p.</p>
+          <p>Slivniška ulica 4, 2312 Orehova vas</p>
+          <p>+386 31 675 241</p>
           <p>bernardbregant3@gmail.com</p>
         </div>
         <nav class="footer-nav" aria-label="Footer menu">
           <a href="#home">Domov</a>
           <a href="#ponudba">Ponudba</a>
           <a href="#onas">O nas</a>
+          <a href="./bernard-bregant.html">Bernard Bregant</a>
           <a href="./kontakt.html">Kontakt</a>
         </nav>
       </div>
     </footer>
+  <script>
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('open');
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        toggle.classList.remove('open');
+        links.classList.remove('open');
+      });
+    });
+  </script>
   </body>
 </html>
