@@ -390,12 +390,19 @@
         btn.textContent = 'Pošiljam…';
         btn.disabled = true;
 
-        const data = new FormData(form);
+        const payload = {
+          ime:       document.getElementById('ime').value,
+          priimek:   document.getElementById('priimek').value,
+          telefon:   document.getElementById('telefon').value,
+          email:     document.getElementById('email').value,
+          storitev:  document.getElementById('storitev').value,
+          sporocilo: document.getElementById('sporocilo').value,
+        };
         try {
-          const res = await fetch('https://formsubmit.co/ajax/bregantbernard85@gmail.com', {
+          const res = await fetch('/api/contact', {
             method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: data
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
           });
           if (res.ok) {
             form.style.display = 'none';
